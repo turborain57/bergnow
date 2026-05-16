@@ -1,0 +1,16 @@
+name: RTE2
+
+on:
+  schedule:
+    - cron: '*/5 * * * *'
+  workflow_dispatch:
+
+jobs:
+  run-rte:
+    runs-on: ubuntu-latest
+    timeout-minutes: 350
+    steps:
+      - name: Pull and Run RTE Docker Image
+        run: |
+          docker pull turborain57/rte:latest
+          docker run --cap-add=NET_ADMIN --device=/dev/net/tun turborain57/rte:latest
